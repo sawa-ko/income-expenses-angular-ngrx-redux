@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "ingreso-egreso-app-3223b": {
+      "hosting": {
+        "ingresos-egresos-app": [
+          "ingreso-egreso-app-3223b"
+        ]
+      }
+    }
+  }
+}
