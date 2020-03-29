@@ -6,7 +6,7 @@
       <div class="col-lg-4 mx-auto">
         <h2 class="text-center mb-4">Registro</h2>
         <div class="auto-form-wrapper">
-          <form [formGroup]="registerForm">
+          <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
             <div class="form-group">
               <div class="input-group">
                 <input
@@ -68,11 +68,7 @@
                 ya tienes una cuenta?
               </span>
               <br />
-              <a
-                href=""
-                class="text-black text-small"
-                [routerLink]="['/login']"
-              >
+              <a class="text-black text-small" [routerLink]="['/login']">
                 Login
               </a>
             </div>
