@@ -8,8 +8,6 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 
-import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './auth/login/login.component';
@@ -43,7 +41,6 @@ import { SidebarComponent } from './share/sidebar/sidebar.component';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireAuthModule,
-    SweetAlert2Module.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent],
