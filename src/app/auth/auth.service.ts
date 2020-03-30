@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 
+import { User } from 'firebase';
+import { map } from 'rxjs/operators';
 import Swal from 'sweetalert2';
 
 @Injectable({
@@ -30,5 +32,23 @@ export class AuthService {
       .catch(error => {
         Swal.fire('Tenemos problemas', error.message, 'error');
       });
+  }
+
+  public initAuthListener() {
+    this.auth.authState.subscribe((user: User) => {
+      console.log(user);
+    });
+  }
+
+  public isAuth() {
+    return this.auth.authState.pipe(
+      map(user => {
+        if (user == null) {
+          this.router.navigate(['login']);
+        }
+
+        return user != null;
+      }),
+    );
   }
 }

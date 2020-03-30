@@ -2,12 +2,11 @@
   <ul class="nav">
     <li class="nav-item nav-profile">
       <div class="nav-link">
-        
         <div class="user-wrapper">
           <div class="profile-image">
-            <img src="assets/images/faces/face1.jpg" alt="profile image">
+            <img src="assets/images/faces/face1.jpg" alt="profile image" />
           </div>
-          
+
           <div class="text-wrapper">
             <p class="profile-name">Cristobal Colón</p>
             <div>
@@ -15,7 +14,6 @@
             </div>
           </div>
         </div>
-        
       </div>
     </li>
 
@@ -40,12 +38,11 @@
       </a>
     </li>
 
-    <li class="nav-item">
+    <li class="nav-item" (click)="doLogOut()">
       <a class="nav-link cursor">
         <i class="menu-icon fa fa-sign-out-alt"></i>
         <span class="menu-title">Cerrar sesión</span>
       </a>
     </li>
-    
   </ul>
 </nav>
