@@ -4,7 +4,6 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import 'firebase/firestore';
 
-import { User } from 'firebase';
 import { map } from 'rxjs/operators';
 import Swal from 'sweetalert2';
 import { Store } from '@ngrx/store';
@@ -13,11 +12,16 @@ import {
   ActivarLoadingAction,
   DesactivarLoadingAction,
 } from '../share/ui.actions';
+import { SetUserAction } from './auth.actions';
+import { User } from './auth.model';
+import { Subscription } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
+  private subscription: Subscription = new Subscription();
+
   constructor(
     private auth: AngularFireAuth,
     private router: Router,
@@ -74,8 +78,17 @@ export class AuthService {
   }
 
   public initAuthListener() {
-    this.auth.authState.subscribe((user: User) => {
-      console.log(user);
+    this.auth.authState.subscribe(user => {
+      if (user) {
+        const subscription = this.firestore
+          .doc(`${user.uid}/usuario`)
+          .valueChanges()
+          .subscribe((usuario: User) => {
+            this.store.dispatch(new SetUserAction(new User(usuario), true));
+          });
+      } else {
+        this.subscription.unsubscribe();
+      }
     });
   }
 
