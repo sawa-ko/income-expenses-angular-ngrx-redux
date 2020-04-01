@@ -4,7 +4,12 @@
   >
     <div class="row w-100">
       <div class="col-lg-4 mx-auto">
-        <h2 class="text-center mb-4" style="color: white;">Ingresar</h2>
+        <h2 *ngIf="!isLoading" class="text-center mb-4" style="color: white;">
+          Ingresar
+        </h2>
+        <h2 *ngIf="isLoading" class="text-center mb-4" style="color: white;">
+          Cargando...
+        </h2>
         <div class="auto-form-wrapper">
           <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
             <div class="form-group">
@@ -55,10 +60,7 @@
                 No estas registrado?
               </span>
               <br />
-              <a
-                class="text-black text-small"
-                [routerLink]="['/register']"
-              >
+              <a class="text-black text-small" [routerLink]="['/register']">
                 Crear una cuenta
               </a>
             </div>
