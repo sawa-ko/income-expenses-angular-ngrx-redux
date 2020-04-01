@@ -21,6 +21,7 @@ import { Subscription } from 'rxjs';
 })
 export class AuthService {
   private subscription: Subscription = new Subscription();
+  public user: User;
 
   constructor(
     private auth: AngularFireAuth,
@@ -85,6 +86,7 @@ export class AuthService {
           .valueChanges()
           .subscribe((usuario: User) => {
             this.store.dispatch(new SetUserAction(new User(usuario), true));
+            (this.user = new User(usuario)), true;
           });
       } else {
         this.subscription.unsubscribe();
@@ -102,5 +104,9 @@ export class AuthService {
         return user != null;
       }),
     );
+  }
+
+  public getUsuario() {
+    return { ...this.user };
   }
 }
