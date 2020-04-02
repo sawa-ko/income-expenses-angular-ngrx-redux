@@ -55,7 +55,7 @@ export class IngresoEgresoComponent implements OnInit, OnDestroy {
         this.store.dispatch(new DesactivarLoadingAction());
         Swal.fire('Creado', ingresoEgreso.descripcion, 'success');
       })
-      .catch(() => {
+      .catch((error: any) => {
         this.store.dispatch(new DesactivarLoadingAction());
         Swal.fire('Error', error.message, 'error');
       });
