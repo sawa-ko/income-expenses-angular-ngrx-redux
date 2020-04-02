@@ -1,10 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { IngresoEgresoService } from '../ingreso-egreso.service';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app.reducer';
-import { IngresoEgreso } from '../ingreso-egreso.model';
 import { filter } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
+import { IngresoEgresoService } from '../ingreso-egreso.service';
+import Swal from 'sweetalert2';
+import { IngresoEgreso } from '../ingreso-egreso.model';
 
 @Component({
   selector: 'app-detalle',
@@ -15,7 +16,10 @@ export class DetalleComponent implements OnInit, OnDestroy {
   public items = [];
   private subscription: Subscription = new Subscription();
 
-  constructor(private store: Store<AppState>) {}
+  constructor(
+    private store: Store<AppState>,
+    private ingresoEgresoService: IngresoEgresoService,
+  ) {}
 
   ngOnInit(): void {
     this.subscription = this.store
@@ -30,5 +34,18 @@ export class DetalleComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  public eliminarItem(uid: string) {}
+  public eliminarItem(item: IngresoEgreso) {
+    this.ingresoEgresoService
+      .eliminarItem(item.uid)
+      .then(() => {
+        Swal.fire(
+          'Item eliminado',
+          `Se ha removido ${item.descripcion} de la lista de ingresos-egresos.`,
+          'success',
+        );
+      })
+      .catch(error => {
+        Swal.fire('Se ha producido un error', error.message, 'error');
+      });
+  }
 }

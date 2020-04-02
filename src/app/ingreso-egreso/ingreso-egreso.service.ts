@@ -62,5 +62,9 @@ export class IngresoEgresoService {
     this.ingresoEgresoListenerSub.unsubscribe();
   }
 
-  public eliminarItem(uid: string) {}
+  public eliminarItem(uid: string) {
+    return this.firestore
+      .doc(`${this.authService.getUsuario().uid}/ingresos-egresos/items/${uid}`)
+      .delete();
+  }
 }
