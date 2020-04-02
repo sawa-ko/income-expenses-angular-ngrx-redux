@@ -13,7 +13,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let item of items">
+            <tr *ngFor="let item of items | ordenIngresoEgreso">
               <td>{{ item.descripcion }}</td>
               <td>{{ item.monto | currency }}</td>
               <td>

@@ -21,6 +21,11 @@ export function AuthReducer(
         autenticado: action.autenticado,
         user: { ...action.user },
       };
+    case authActions.UNSET_USER:
+      return {
+        autenticado: false,
+        user: null,
+      };
     default:
       return state;
   }
