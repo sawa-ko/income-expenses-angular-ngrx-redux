@@ -29,4 +29,6 @@ export class DetalleComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
+
+  public eliminarItem(uid: string) {}
 }
